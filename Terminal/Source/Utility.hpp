@@ -83,6 +83,13 @@ namespace BearLibTerminal
 		return stream.str();
 	}
 
+        template<> std::basic_string<wchar_t> to_string(const char32_t& value)
+        {
+            std::basic_stringstream<wchar_t> stream;
+            stream << static_cast<std::uint32_t>(value);
+            return stream.str();
+        }
+
 	template<typename char_t> bool starts_with(const std::basic_string<char_t>& what, const std::basic_string<char_t>& with)
 	{
 		return what.find(with) == 0;
