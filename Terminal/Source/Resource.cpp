@@ -119,7 +119,7 @@ namespace BearLibTerminal
 			LOG(Debug, "Loading resource from memory '" << name << "'");
 			std::vector<uint8_t> result(mem.size);
 			memcpy(&result[0], (uint8_t*)mem.address, mem.size);
-			return std::move(result);
+			return result;//std::move(result);
 		}
 		else
 		{
