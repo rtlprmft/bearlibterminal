@@ -1466,8 +1466,8 @@ namespace BearLibTerminal
 				}
 				else if (name == L"font")
 				{
-					auto i = g_fonts.find(params);
-					font_offset = (i == g_fonts.end()? 0: i->second * 0x01000000);
+					auto it = g_fonts.find(params);
+					font_offset = (it == g_fonts.end()? 0: it->second * 0x01000000);
 				}
 				else if (name == L"/font")
 				{
@@ -1515,7 +1515,7 @@ namespace BearLibTerminal
 			}
 			else if (c == L'\t')
 			{
-				for (int i = 0; i < m_options.output_tab_width; i++)
+				for (int j = 0; j < m_options.output_tab_width; j++)
 				{
 					AppendSymbol(L' ');
 				}
@@ -1560,8 +1560,8 @@ namespace BearLibTerminal
 							last_line_break = j - 1;
 						}
 
-						int offset = last_line_break + 1;
-						int leave = offset;
+						int _offset = last_line_break + 1;
+						int leave = _offset;
 
 						if ((line.symbols[last_line_break].code & Tileset::kCharOffsetMask) == L' ')
 						{
@@ -1570,7 +1570,7 @@ namespace BearLibTerminal
 
 						auto copy = i;
 						Line next;
-						next.symbols = std::vector<Line::Symbol>(line.symbols.begin()+offset, line.symbols.end());
+						next.symbols = std::vector<Line::Symbol>(line.symbols.begin()+_offset, line.symbols.end());
 						lines.insert(++copy, next);
 						line.symbols.resize(leave);
 
@@ -2198,8 +2198,8 @@ namespace BearLibTerminal
 				{
 					for (auto& leaf: layer.cells[i].leafs)
 					{
-						auto i = g_codespace.find(leaf.code);
-						auto tile = (i == g_codespace.end()? replacement_tile: i->second.get());
+						auto it = g_codespace.find(leaf.code);
+						auto tile = (it == g_codespace.end()? replacement_tile: it->second.get());
 
 						if (tile->texture != current_texture)
 						{
