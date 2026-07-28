@@ -23,6 +23,7 @@
 #ifndef BEARLIBTERMINAL_COLOR_HPP
 #define BEARLIBTERMINAL_COLOR_HPP
 
+#include <bit>
 #include <cstdint>
 
 namespace BearLibTerminal
@@ -45,9 +46,9 @@ namespace BearLibTerminal
 
 		Color(std::uint32_t bgra)
 		{
-			*(std::uint32_t*)this = bgra;
+                        *this = std::bit_cast<Color>(bgra);
 		}
-
+/*
 		bool operator== (const Color& another) const
 		{
 			return *(const std::uint32_t*)this == *(const std::uint32_t*)&another;
@@ -57,17 +58,17 @@ namespace BearLibTerminal
 		{
 			return !(*this == another);
 		}
-
+*/
 		operator uint32_t() const
 		{
-			return *(const std::uint32_t*)this;
+                        return std::bit_cast<uint32_t>(*this);
 		}
 
 		Color operator+ (Color other)
 		{
 			return Color(r+other.r, g+other.g, b+other.b, a+other.a);
 		}
-	};
+	 } __attribute__((packed));
 
 	struct HSV
 	{
