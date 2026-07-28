@@ -132,19 +132,28 @@ namespace BearLibTerminal
 	}
 
 	template<typename char_t> std::basic_string<char_t> trim(const std::basic_string<char_t>& s)
-	{
-		int start = 0, end = s.length()-1;
+        {
+                if (s.empty())
+                    return { };
 
-		while (start < s.length() && ::isspace(s[start]))
+                size_t start = 0;
+                size_t end = s.length();
+
+                const std::locale& loc = std::locale::classic();
+
+		while (start < s.length() && std::isspace(s[start], loc))
 			start++;
 
-		while (end >= 0 && ::isspace(s[end]))
+		while (end>0 && std::isspace(s[end-1], loc))
 			end--;
 
-		if (end >= start && (end-start+1) <= (int)s.length())
-			return s.substr(start, end-start+1);
+                if (start==0 && end==s.length())
+                        return s; // Do not copy s
+
+		if (end > start)
+			return s.substr(start, end-start);
 		else
-			return std::basic_string<char_t>();
+                        return { };
 	}
 
 	std::vector<std::wstring> split(const std::wstring& s, wchar_t delimiter);
