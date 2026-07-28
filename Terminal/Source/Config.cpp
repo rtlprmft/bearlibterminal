@@ -162,7 +162,7 @@ namespace BearLibTerminal
 					// Save
 					std::wstring name = line.substr(1, rbracket-1);
 					LOG(Trace, L"[" << name << L"]");
-					Section& section = m_sections[(current_section = L"ini." + name)];
+					/*Section& section = m_sections[(*/current_section = L"ini." + name/*)]*/;
 				}
 				else
 				{
