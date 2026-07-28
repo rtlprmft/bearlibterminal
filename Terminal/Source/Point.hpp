@@ -40,12 +40,12 @@ namespace BearLibTerminal
 			x(x),
 			y(y)
 		{ }
-
+/*
 		BasicPoint(const BasicPoint<T>& from):
 			x(from.x),
 			y(from.y)
 		{ }
-
+*/
 		inline bool operator==(BasicPoint<T> other) const
 		{
 			return x == other.x && y == other.y;
