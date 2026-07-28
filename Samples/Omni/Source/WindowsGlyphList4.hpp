@@ -18,10 +18,10 @@ struct UnicodeRange
 	int start, end;
 	std::set<int> codes;
 
-	UnicodeRange(const std::string& name, int start, int end):
-		name(name),
-		start(start),
-		end(end)
+	UnicodeRange(const std::string& _name, int _start, int _end):
+		name(_name),
+		start(_start),
+		end(_end)
 	{ }
 
 	UnicodeRange& Add(int code)
