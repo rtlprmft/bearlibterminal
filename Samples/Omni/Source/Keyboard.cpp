@@ -216,7 +216,7 @@ void TestKeyboard()
 	const color_t available_key_text = 0xFFBBBBBB;
 	const color_t unavailable_key_text = 0xFF404040;
 	const color_t grid_color = 0xFF606060;
-	const color_t note_text_color = 0xFF008000;
+	//const color_t note_text_color = 0xFF008000;
 
 	while (true)
 	{
