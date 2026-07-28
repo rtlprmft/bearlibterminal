@@ -76,14 +76,14 @@ namespace BearLibTerminal
 		return result;
 	}
 
-	template<typename char_t, typename T> std::basic_string<char_t> to_string(const T& value)
+	template<typename char_t, typename T> inline std::basic_string<char_t> to_string(const T& value)
 	{
 		std::basic_ostringstream<char_t> stream;
 		stream << value;
 		return stream.str();
 	}
 
-        template<> std::basic_string<wchar_t> to_string(const char32_t& value)
+        template<> inline std::basic_string<wchar_t> to_string(const char32_t& value)
         {
             std::basic_stringstream<wchar_t> stream;
             stream << static_cast<std::uint32_t>(value);
