@@ -315,9 +315,9 @@ namespace BearLibTerminal
 		m_im(nullptr),
 		m_ic(nullptr),
 		//m_wm_close_message(),
+		m_size_hints(nullptr),
 		m_glXSwapIntervalEXT(nullptr),
 		m_glXSwapIntervalMESA(nullptr),
-		m_size_hints(nullptr),
 		m_expose_timer(0)
 	{
 		try
