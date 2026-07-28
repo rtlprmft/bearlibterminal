@@ -103,7 +103,7 @@ int main()
 		else if ((key >= TK_1 && key <= TK_9) || (key >= TK_A && key <= TK_Z))
 		{
 			int index = key >= TK_1? (key-TK_1): 9+(key-TK_A);
-			if (index >= 0 && index < entries.size() && entries[index].func)
+			if (index >= 0 && size_t(index) < entries.size() && entries[index].func)
 			{
 				entries[index].func();
 				reset();
