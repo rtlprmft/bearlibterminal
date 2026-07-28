@@ -204,7 +204,7 @@ namespace BearLibTerminal
 		else
 		{
 			// Tileset: uses a reverese codepage (linear index 0..N -> tile index).
-			for (int i = 0; m_cache.size() < grid_size.Area(); i++)
+			for (int i = 0; grid_size.Area() >= 0 && m_cache.size() < size_t(grid_size.Area()); i++)
 			{
 				int index = codepage->Convert(i);
 
