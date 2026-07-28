@@ -302,8 +302,8 @@ namespace BearLibTerminal
 		int columns = 0;
 		int pixel_size = 0;
 
-		int height = (*m_font_face)->size->metrics.height >> 6;
-		int descender = (*m_font_face)->size->metrics.descender >> 6;
+		//int height = (*m_font_face)->size->metrics.height >> 6;
+		//int descender = (*m_font_face)->size->metrics.descender >> 6;
 		int bx = (slot->metrics.horiBearingX >> 6) / 64;
 		int by = slot->metrics.horiBearingY >> 6;
 
