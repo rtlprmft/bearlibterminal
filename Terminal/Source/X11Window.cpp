@@ -748,7 +748,7 @@ namespace BearLibTerminal
 
 		// Try to map keycode to some keyboard layout
 		int count = 0;
-		KeySym sym, *mapped = XGetKeyboardMapping(m_display, kc, 1, &count);
+		KeySym sym=0, *mapped = XGetKeyboardMapping(m_display, kc, 1, &count);
 		if (count > 0 && mapped != nullptr && mapped[0] != NoSymbol)
 		{
 			sym = mapped[0];
