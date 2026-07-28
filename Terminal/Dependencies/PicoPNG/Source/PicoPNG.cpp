@@ -105,13 +105,13 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
         treeD.makeFromLengths(bitlenD, 15);
       }
       HuffmanTree codetree, codetreeD, codelengthcodetree; //the code tree for Huffman codes, dist codes, and code length codes
-      unsigned long huffmanDecodeSymbol(const unsigned char* in, size_t& bp, const HuffmanTree& codetree, size_t inlength)
+      unsigned long huffmanDecodeSymbol(const unsigned char* in, size_t& bp, const HuffmanTree& _codetree, size_t inlength)
       { //decode a single symbol from given list of bits with given code tree. return value is the symbol
         bool decoded; unsigned long ct;
         for(size_t treepos = 0;;)
         {
           if((bp & 0x07) == 0 && (bp >> 3) > inlength) { error = 10; return 0; } //error: end reached without endcode
-          error = codetree.decode(decoded, ct, treepos, readBitFromStream(bp, in)); if(error) return 0; //stop, an error happened
+          error = _codetree.decode(decoded, ct, treepos, readBitFromStream(bp, in)); if(error) return 0; //stop, an error happened
           if(decoded) return ct;
         }
       }
@@ -239,7 +239,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
       readPngHeader(&in[0], size); if(error) return;
       size_t pos = 33; //first byte of the first chunk after the header
       std::vector<unsigned char> idat; //the data from idat chunks
-      bool IEND = false, known_type = true;
+      bool IEND = false/*, known_type = true*/;
       info.key_defined = false;
       while(!IEND) //loop through the chunks, ignoring unknown chunks and stopping at IEND chunk. IDAT data is put at the start of the in buffer
       {
@@ -291,7 +291,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
         {
           if(!(in[pos + 0] & 32)) { error = 69; return; } //error: unknown critical chunk (5th bit of first byte of chunk type is 0)
           pos += (chunkLength + 4); //skip 4 letters and uninterpreted data of unimplemented chunk
-          known_type = false;
+          //known_type = false;
         }
         pos += 4; //step over CRC (which is ignored)
       }
@@ -429,11 +429,11 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
       else if(colorType == 3) { if(!(bd == 1 || bd == 2 || bd == 4 || bd == 8            )) return 37; else return 0; }
       else return 31; //unexisting color type
     }
-    unsigned long getBpp(const Info& info)
+    unsigned long getBpp(const Info& _info)
     {
-      if(info.colorType == 2) return (3 * info.bitDepth);
-      else if(info.colorType >= 4) return (info.colorType - 2) * info.bitDepth;
-      else return info.bitDepth;
+      if(_info.colorType == 2) return (3 * _info.bitDepth);
+      else if(_info.colorType >= 4) return (_info.colorType - 2) * _info.bitDepth;
+      else return _info.bitDepth;
     }
     int convert(std::vector<unsigned char>& out, const unsigned char* in, Info& infoIn, unsigned long w, unsigned long h)
     { //converts from any color type to 32-bit. return value = LodePNG error code
