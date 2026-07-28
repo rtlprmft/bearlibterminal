@@ -179,8 +179,8 @@ namespace BearLibTerminal
 					Color base(parse<int>(parts[0]), parse<int>(parts[1]), parse<int>(parts[2]), parse<int>(parts[3]));
 					return Shade(base, shade);
 				}
-			}
-			else if (name[0] == L'-' || (std::isdigit(name[0])))
+                        }
+			else if (name[0] == L'-' || (std::isdigit(name[0], std::locale::classic())))
 			{
 				// Decimal numeric format
 				uint32_t value = (uint32_t)parse<int64_t>(name, std::dec);

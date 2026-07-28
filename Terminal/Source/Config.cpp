@@ -137,7 +137,9 @@ namespace BearLibTerminal
 			// Cannot read the file, though it does exist.
 			LOG(Error, L"Cannot open configuration file '" << m_filename << L"'");
 			return;
-		}
+                }
+
+                const std::locale& loc = std::locale::classic();
 
 		// A name of the current section.
 		std::wstring current_section;
@@ -145,7 +147,7 @@ namespace BearLibTerminal
 		LOG(Trace, L"Configuration file contents:");
 		for (auto& line: infile_lines)
 		{
-			if (line.empty() || std::isspace(line[0]))
+			if (line.empty() || std::isspace(line[0], loc))
 			{
 				continue; // Еmpty line or one staring with space.
 			}
@@ -375,6 +377,8 @@ namespace BearLibTerminal
 			}
 		}
 
+                const std::locale& loc = std::locale::classic();
+
 		std::list<std::string> lines;
 		auto si = lines.end(); // Iterator to last line in matching section
 		auto pi = lines.end(); // Iterator to the found property line
@@ -384,7 +388,7 @@ namespace BearLibTerminal
 		{
 			lines.push_back(line);
 
-			if (line.empty() || std::isspace(line[0]))
+			if (line.empty() || std::isspace(line[0], loc))
 			{
 				// Empty line or one starting with whitespace.
 				continue;
@@ -470,9 +474,11 @@ namespace BearLibTerminal
 		}
 
 		auto append_escaped = [](std::ostringstream& stream, const std::string& value)
-		{
+                {
+                        const std::locale& loc = std::locale::classic();
+
 			if (value.find('\'') != std::string::npos ||
-			    (!value.empty() && (std::isspace(value.front()) || std::isspace(value.back()))))
+			    (!value.empty() && (std::isspace(value.front(), loc) || std::isspace(value.back(), loc))))
 			{
 				const char quote_mark = '\'';
 				stream << quote_mark;

@@ -45,7 +45,9 @@ namespace BearLibTerminal
 
 	std::wstring read_until3(const wchar_t*& p, const std::wstring& until)
 	{
-		std::wstring value, space;
+                const std::locale &loc = std::locale::classic();
+
+                std::wstring value, space;
 		wchar_t closing_quote = 0;
 
 		while (*p != L'\0' && (closing_quote || until.find(*p) == std::wstring::npos))
@@ -54,7 +56,7 @@ namespace BearLibTerminal
 			{
 				// Just skip.
 			}
-			else if (std::isspace(*p) && !closing_quote)
+			else if (std::isspace(*p, loc) && !closing_quote)
 			{
 				// Accumulate space.
 				space += *p;

@@ -907,13 +907,15 @@ namespace BearLibTerminal
 						add(code, release_too);
 					}
 					else
-					{
+                                        {
+                                                const std::locale& loc = std::locale::classic();
+
 						// Maybe, shortened list of alphanumeric keys?
 						bool correct = true;
 
 						for (auto& c: name) // TODO: shorter check
 						{
-							if (!::isalpha((int)c) && !::isdigit((int)c))
+							if (!std::isalpha(c, loc) && !std::isdigit(c,loc))
 							{
 								correct = false;
 								break;
