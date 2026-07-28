@@ -1084,7 +1084,7 @@ namespace BearLibTerminal
 
 	void Terminal::Clear()
 	{
-		if (m_world.stage.backbuffer.background.size() != m_world.stage.size.Area())
+		if (m_world.stage.size.Area()>=0 && m_world.stage.backbuffer.background.size() != size_t(m_world.stage.size.Area()))
 		{
 			LOG(Trace, "World resize");
 			m_world.stage.Resize(m_world.stage.size);
@@ -1145,7 +1145,7 @@ namespace BearLibTerminal
 		m_world.state.layer = layer_index;
 		m_vars[TK_LAYER] = layer_index;
 
-		while (m_world.stage.backbuffer.layers.size() <= m_world.state.layer)
+		while (m_world.stage.backbuffer.layers.size() <= size_t(m_world.state.layer))
 		{
 			m_world.stage.backbuffer.layers.emplace_back(m_world.stage.size);
 		}
@@ -2414,7 +2414,7 @@ namespace BearLibTerminal
 				{
 					m_scale_step -= 1;
 				}
-				else if ((event.code == TK_EQUALS || event.code == TK_KP_PLUS) && m_scale_step < kScaleSteps.size()-1)
+				else if ((event.code == TK_EQUALS || event.code == TK_KP_PLUS) && size_t(m_scale_step+1) < kScaleSteps.size())
 				{
 					m_scale_step += 1;
 				}
@@ -2514,7 +2514,7 @@ namespace BearLibTerminal
 
 		for (auto& slot: event.properties)
 		{
-			if (slot.first >= 0 && slot.first < m_vars.size())
+			if (slot.first >= 0 && size_t(slot.first) < m_vars.size())
 			{
 				m_vars[slot.first] = slot.second;
 			}
