@@ -134,12 +134,12 @@ namespace BearLibTerminal
 
 		int cx = (int)std::floor(size.width/2.0f-thickness/2.0f); // 8/2.0f = 4 (fifth pixel), 3/2.0 = 1[.5] (second pixel)
 		int cy = (int)std::floor(size.height/2.0f-thickness/2.0f);
-		int cl = cx - thickness;
-		int ct = cy - thickness;
-		int cw = thickness * 3;
-		int ch = thickness * 3;
-		int cr = cl + cw;
-		int cb = ct + ch;
+		//int cl = cx - thickness;
+		//int ct = cy - thickness;
+		//int cw = thickness * 3;
+		//int ch = thickness * 3;
+		//int cr = cl + cw;
+		//int cb = ct + ch;
 
 		auto put_rect = [&](int left, int top, int width, int height, int alpha)
 		{
