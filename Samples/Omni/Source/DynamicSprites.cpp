@@ -58,13 +58,13 @@ void TestDynamicSprites()
 	terminal_set("window.title='Omni: dynamic sprites'");
 	terminal_set("U+E000: ../Media/Tiles.png, size=32x32, align=top-left");
 
-	int map_width = map[0].length();
-	int map_height = map.size();
+	size_t map_width = map[0].length();
+	size_t map_height = map.size();
 	std::vector<color_t> minimap(map_width*map_height, 0);
 	int x0 = 0;
 	int y0 = 0;
-	int view_height = 10;
-	int view_width = 14;
+	const size_t view_height = 10;
+	const size_t view_width = 14;
 	int minimap_scale = 4;
 	int panel_width = (terminal_state(TK_WIDTH) - view_width*4 - 1)*terminal_state(TK_CELL_WIDTH);
 	int margin = (panel_width - map_width*minimap_scale)/2;
@@ -72,9 +72,9 @@ void TestDynamicSprites()
 	auto DrawMap = [&]
 	{
 		terminal_color("white");
-		for (int y=y0; y<y0+view_height; y++)
+		for (size_t y=y0; y<y0+view_height; y++)
 		{
-			for (int x=x0; x<x0+view_width; x++)
+			for (size_t x=x0; x<x0+view_width; x++)
 			{
 				wchar_t code = map[y][x];
 				if (!palette.count(code)) continue;
@@ -95,9 +95,9 @@ void TestDynamicSprites()
 
 	auto MakeMinimap = [&]
 	{
-		for (int y=0; y<map_height; y++)
+		for (size_t y=0; y<map_height; y++)
 		{
-			for (int x=0; x<map_width && x<map[y].length(); x++)
+			for (size_t x=0; x<map_width && x<map[y].length(); x++)
 			{
 				wchar_t code = map[y][x];
 				color_t color = palette.count(code)? palette[code].color: 0xFF000000;
@@ -105,9 +105,9 @@ void TestDynamicSprites()
 			}
 		}
 
-		for (int y=y0; y<y0+view_height; y++)
+		for (size_t y=y0; y<y0+view_height; y++)
 		{
-			for (int x=x0; x<x0+view_width; x++)
+			for (size_t x=x0; x<x0+view_width; x++)
 			{
 				color_t& dst = minimap[y*map_width+x];
 				dst = BlendColors(dst, 0x60FFFFFF);
@@ -129,8 +129,8 @@ void TestDynamicSprites()
 
 		DrawMap();
 		terminal_color("light gray");
-		for (int x=0; x<80; x++) terminal_put(x, view_height*2, 0x2580);
-		for (int y=0; y<view_height*2; y++) terminal_put(view_width*4, y, 0x2588);
+		for (size_t x=0; x<80; x++) terminal_put(x, view_height*2, 0x2580);
+		for (size_t y=0; y<view_height*2; y++) terminal_put(view_width*4, y, 0x2588);
 
 		MakeMinimap();
 		terminal_color("white");
@@ -146,7 +146,7 @@ void TestDynamicSprites()
 		{
 			break;
 		}
-		else if (key == TK_RIGHT && (x0 < map_width-view_width))
+		else if (key == TK_RIGHT && (x0+view_width < map_width))
 		{
 			x0 += 1;
 		}
@@ -154,7 +154,7 @@ void TestDynamicSprites()
 		{
 			x0 -= 1;
 		}
-		else if (key == TK_DOWN && (y0 < map_height-view_height))
+		else if (key == TK_DOWN && (y0+view_height < map_height))
 		{
 			y0 += 1;
 		}
