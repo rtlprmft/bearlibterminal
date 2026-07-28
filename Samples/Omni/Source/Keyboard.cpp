@@ -275,7 +275,7 @@ void TestKeyboard()
 		}
 
 		terminal_color(unavailable_key_text);
-		for (int i=0; i < N_unavailable_keys; i++)
+		for (size_t i=0; i < N_unavailable_keys; i++)
 		{
 			mkey_t& k = unavailable_keys[i];
 			terminal_printf(6+k.x, 1+k.y, "%s", k.caption);
