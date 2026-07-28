@@ -88,8 +88,8 @@ struct Message
 		height(0)
 	{ }
 
-	Message(const std::string& text):
-		text(text),
+	Message(const std::string& _text):
+		text(_text),
 		height(0)
 	{ }
 
