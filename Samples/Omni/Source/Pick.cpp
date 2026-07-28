@@ -30,7 +30,7 @@ void TestPick()
 		terminal_put(x, y, 'a' + (rand() % 26));
 
 		terminal_composition(TK_ON);
-		for (int i = 1; i < n; i++)
+		for (int j = 1; j < n; j++)
 		{
 			terminal_color(colors[rand() % 7]);
 			terminal_put(x, y, combining[rand() % 7]);
