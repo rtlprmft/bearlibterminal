@@ -140,19 +140,19 @@ void TestTextInput()
 				terminal_refresh();
 
 				character = L' ';
-				int key = terminal_read();
-				if (key == TK_ESCAPE || key == TK_CLOSE || key == TK_RETURN)
+				int _key = terminal_read();
+				if (_key == TK_ESCAPE || _key == TK_CLOSE || _key == TK_RETURN)
 				{
 					break;
 				}
 				else if (terminal_check(TK_WCHAR))
 				{
 					character = terminal_state(TK_WCHAR);
-					char_result = key;
+					char_result = _key;
 				}
-				else if (key < TK_KEY_RELEASED)
+				else if (_key < TK_KEY_RELEASED)
 				{
-					char_result = key;
+					char_result = _key;
 				}
 			}
 			while (true);
