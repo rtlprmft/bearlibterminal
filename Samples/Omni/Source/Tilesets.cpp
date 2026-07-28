@@ -49,7 +49,7 @@ void TestTilesets()
 
 	terminal_color("white");
 	std::vector<int> order = {11, 10, 14, 12, 13};
-	for (int i=0; i<order.size(); i++)
+	for (size_t i=0; i<order.size(); i++)
 	{
 		terminal_put(2+3+25+i*4, 11, 0xE200+order[i]);
 		terminal_put(2+3+25+(order.size()+1)*4, 11, 0xE200+order[i]);
