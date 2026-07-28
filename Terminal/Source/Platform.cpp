@@ -237,7 +237,7 @@ namespace BearLibTerminal
 			if (c == L'/')
 				c = L'\\';
 #endif
-		return std::move(name);
+		return name;
 	}
 
 	// FIXME: polymorphic stream use is not guaranteed to be safe!
@@ -297,7 +297,7 @@ namespace BearLibTerminal
 		file.read((char*)&result[0], size);
 
 		LOG(Debug, "Loaded resource from '" << name << "' (" << size << " bytes)");
-		return std::move(result);
+		return result;
 	}
 
 	bool FileExists(std::wstring name)
@@ -495,7 +495,7 @@ namespace BearLibTerminal
 		if ((dir = ::opendir(u8path.c_str())) != nullptr)
 		{
 			struct dirent ent, *pent = &ent;
-			while (::readdir_r(dir, pent, &pent) == 0 && pent != nullptr)
+			while ((pent = ::readdir(dir)) != nullptr)
 			{
 				struct stat st;
 				if (::stat((u8path + pent->d_name).c_str(), &st) == 0 && (st.st_mode & S_IFREG))
