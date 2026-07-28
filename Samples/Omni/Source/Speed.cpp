@@ -18,7 +18,7 @@ struct color3_t
 color3_t GetShiftedColor(int shift)
 {
 	float f = (shift%80) / 80.0f;
-	color3_t c = {0};
+	color3_t c = { };
 
 	if (f < 0.33f) // From red to green (through orange)
 	{
@@ -78,12 +78,12 @@ void TestSpeed()
 	unsigned int shift_f = 0, shift_b = 0, shift_f2 = 0;
 	float shift_f2f = 0;
 
-	color_t shifted_f[80], shifted_b[80];
+	color_t /*shifted_f[80],*/ shifted_b[80];
 	for (int i = 0; i < 80; i++)
 	{
 		color3_t c = GetShiftedColor(i);
 		shifted_b[i] = GetHighlightedColor(c);
-		shifted_f[i] = GetDimmedColor(c);
+		//shifted_f[i] = GetDimmedColor(c);
 	}
 
 	uint64_t fps_update_time = GetTime();
