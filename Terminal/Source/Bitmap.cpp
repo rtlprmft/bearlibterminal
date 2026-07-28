@@ -353,7 +353,7 @@ namespace BearLibTerminal
 		Size original_size = original.GetSize();
 		Bitmap result(size, Color());
 
-		auto filter = [&](int x, int y, float ox, float oy)
+		auto filter = [&](int/*x*/, int/*y*/, float ox, float oy)
 		{
 			int x1 = std::floor(ox);
 			int y1 = std::floor(oy);
