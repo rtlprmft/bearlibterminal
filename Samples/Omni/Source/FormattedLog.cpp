@@ -88,8 +88,8 @@ struct Message
 		height(0)
 	{ }
 
-	Message(const std::string& _text):
-		text(_text),
+	Message(const std::string& text):
+		text(text),
 		height(0)
 	{ }
 
@@ -204,7 +204,8 @@ void TestFormattedLog()
 		terminal_bkcolor("none");
 
 		// Find topmost visible message
-		int index = 0, first_line = 0;
+                size_t index = 0;
+                int first_line = 0;
 		for (; first_line < total_messages_height; index++)
 		{
 			auto& message = messages[index];
