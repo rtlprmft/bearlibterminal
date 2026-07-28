@@ -36,7 +36,7 @@ namespace BearLibTerminal
 		auto now = std::chrono::system_clock::now();
 		auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
 		time_t time = std::chrono::system_clock::to_time_t(now);
-		struct tm tm = {0};
+		struct tm tm = { };
 #if defined(_MSC_VER) || defined(__MINGW32__)
 		localtime_s(&tm, &time); // MSVC/MinGW
 #else
@@ -81,12 +81,12 @@ namespace BearLibTerminal
 		m_truncated = false;
 	}
 
-	void Log::Write(Level level, const std::wstring& what)
+	void Log::Write(Level _level, const std::wstring& what)
 	{
 		std::wostringstream ss;
-		ss << FormatTime().c_str() << " [" << level << "] " << what << std::endl;
+		ss << FormatTime().c_str() << " [" << _level << "] " << what << std::endl;
 
-		if (filename.empty() || level <= Level::Error)
+		if (filename.empty() || _level <= Level::Error)
 		{
 			WriteStandardError(UTF8Encoding().Convert(ss.str()).c_str());
 		}
