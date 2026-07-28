@@ -13,14 +13,14 @@ void TestDefaultFont()
 	terminal_set("window: size=80x25, cellsize=auto, title='Omni: WGL4'; font=default");
 
 	const int hoffset = 40;
-	int current_range = 0;
+	size_t current_range = 0;
 
 	while (true)
 	{
 		terminal_clear();
 		terminal_wprint(2, 1, L"[color=white]Select unicode character range:");
 
-		for (int i=0; i<g_wgl4_ranges.size(); i++)
+		for (size_t i=0; i<g_wgl4_ranges.size(); i++)
 		{
 			bool selected = i == current_range;
 			terminal_color(selected? color_from_name("orange"): color_from_name("light gray"));
