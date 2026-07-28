@@ -85,7 +85,7 @@ void TestInputFiltering()
 			}
 			else if (key >= TK_1 && key <= TK_9)
 			{
-				int index = (key - TK_1) + 1;
+				size_t index = (key - TK_1) + 1;
 				if (index < events.size())
 				{
 					auto& event = events[index];
