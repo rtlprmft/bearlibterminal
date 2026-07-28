@@ -40,6 +40,9 @@
 #  endif
 #endif
 
+
+template class std::basic_string<char32_t>;
+
 namespace BearLibTerminal
 {
 	/*
