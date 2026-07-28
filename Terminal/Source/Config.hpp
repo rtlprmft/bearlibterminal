@@ -31,11 +31,11 @@
 
 namespace BearLibTerminal
 {
-	template<typename char_t> struct ci_less: // FIXME: --> Utility
-		std::binary_function<std::basic_string<char_t>, std::basic_string<char_t>, bool>
+	template<typename char_t> struct ci_less/*: // FIXME: --> Utility
+		std::binary_function<std::basic_string<char_t>, std::basic_string<char_t>, bool>*/
 	{
-		struct nocase_compare:
-			public std::binary_function<char_t, char_t, bool>
+		struct nocase_compare/*:
+			public std::binary_function<char_t, char_t, bool>*/
 		{
 			bool operator()(const char_t& c1, const char_t& c2) const
 			{
