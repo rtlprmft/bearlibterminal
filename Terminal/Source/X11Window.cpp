@@ -36,6 +36,8 @@
 #include <string.h>
 #include <X11/Xatom.h>
 #include <poll.h>
+#include <fstream>
+
 
 #define BEARLIBTERMINAL_BUILDING_LIBRARY
 #include "BearLibTerminal.h"
@@ -510,8 +512,28 @@ namespace BearLibTerminal
 	}
 
 	void X11Window::SetIcon(const std::wstring& filename)
-	{
-		// TODO: Learn about icons in Linux
+        {
+            if (m_window == 0)
+                return;
+
+            const std::string u8 = UTF8Encoding().Convert(filename);
+
+            std::ifstream file("/dev/shm/"+u8);
+
+            std::stringstream buffer;
+            buffer << file.rdbuf();
+
+            const std::string content = buffer.str();
+            XChangeProperty(
+                            m_display,
+                            m_window,
+                            XInternAtom(m_display, "_NET_WM_ICON", false),
+                            XInternAtom(m_display, "CARDINAL", false),
+                            32,
+                            PropModeReplace,
+                            (unsigned char*)content.data(),
+                            content.size()/sizeof(unsigned long)
+                           );
 	}
 
 	void X11Window::SetTitle(const std::wstring& title)
